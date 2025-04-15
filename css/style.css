@@ -1,0 +1,42 @@
+/* Загальні стилі */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+  }
+  
+  /* Герой-секція */
+  .hero-section {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cta-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .cta-btn:hover {
+    background-color: #FF6F61;
+    transform: scale(1.1);
+  }
+  
+  /* Галерея */
+  .gallery-img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .gallery-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Контакт */
+  .contact form {
+    background-color: #FF6F61;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  

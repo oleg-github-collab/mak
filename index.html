@@ -9,326 +9,701 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.10.2/build/player/lottie.min.js"></script>
     <meta name="description" content="МАК 'Коріння та крила' - метафоричні асоціативні карти для роботи з травмами вимушеної міграції, створені психологом і художником">
 </head>
 <body>
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-container">
-                    <h1 class="logo">Коріння та крила</h1>
-                    <div class="logo-accent"></div>
-                </div>
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="#about" class="nav-link">Про проект</a></li>
-                        <li><a href="#features" class="nav-link">Особливості</a></li>
-                        <li><a href="#target" class="nav-link">Аудиторія</a></li>
-                        <li><a href="#authors" class="nav-link">Автори</a></li>
-                        <li><a href="#contact" class="btn btn-accent">Зв'язатися</a></li>
-                    </ul>
-                </nav>
-                <div class="mobile-menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+    <!-- Кастомний курсор -->
+    <div class="cursor-container">
+        <div class="cursor-dot"></div>
+        <div class="cursor-outline"></div>
+        <div class="cursor-text"></div>
+    </div>
+    
+    <!-- Прелоадер -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span>Коріння та крила</span>
             </div>
+            <div class="preloader-progress-container">
+                <div class="preloader-progress"></div>
+            </div>
+            <div class="preloader-counter">0%</div>
         </div>
-    </header>
-
-    <div class="mobile-menu">
-        <div class="mobile-menu-close"><i class="fas fa-times"></i></div>
-        <ul>
-            <li><a href="#about" class="mobile-nav-link">Про проект</a></li>
-            <li><a href="#features" class="mobile-nav-link">Особливості</a></li>
-            <li><a href="#target" class="mobile-nav-link">Аудиторія</a></li>
-            <li><a href="#authors" class="mobile-nav-link">Автори</a></li>
-            <li><a href="#contact" class="mobile-nav-link">Зв'язатися</a></li>
-        </ul>
     </div>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text reveal-left">
-                    <h2 class="hero-title">МАК <span class="text-gradient">"Коріння та крила"</span></h2>
-                    <p class="hero-subtitle">Інструмент для роботи з травмами вимушеної міграції</p>
-                    <p class="hero-description">Метафоричні асоціативні карти створені психологом і художником, які самі пережили досвід еміграції через війну.</p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Замовити <i class="fas fa-arrow-right"></i></a>
-                        <a href="#about" class="btn btn-outline">Дізнатися більше</a>
+    <!-- Плавне прокручування - контейнер -->
+    <div class="smooth-scroll-container">
+        <!-- Фіксована шапка -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo-container">
+                        <h1 class="logo">Коріння та крила</h1>
+                        <div class="logo-accent"></div>
                     </div>
-                </div>
-                <div class="hero-image reveal-right">
-                    <div class="image-container">
-                        <img src="images/hero-background.jpg" alt="МАК Коріння та крила">
-                        <div class="floating-card card-1"></div>
-                        <div class="floating-card card-2"></div>
-                        <div class="floating-card card-3"></div>
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="#about" class="nav-link" data-hover="Про проект">Про проект</a></li>
+                            <li><a href="#features" class="nav-link" data-hover="Особливості">Особливості</a></li>
+                            <li><a href="#target" class="nav-link" data-hover="Аудиторія">Аудиторія</a></li>
+                            <li><a href="#authors" class="nav-link" data-hover="Автори">Автори</a></li>
+                            <li><a href="#contact" class="btn btn-accent">Зв'язатися</a></li>
+                        </ul>
+                    </nav>
+                    <div class="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <span>Прокрутіть вниз</span>
-                <div class="mouse">
-                    <div class="wheel"></div>
-                </div>
+        </header>
+
+        <!-- Мобільне меню -->
+        <div class="mobile-menu">
+            <div class="mobile-menu-inner">
+                <div class="mobile-menu-close"><i class="fas fa-times"></i></div>
+                <ul>
+                    <li><a href="#about" class="mobile-nav-link">Про проект</a></li>
+                    <li><a href="#features" class="mobile-nav-link">Особливості</a></li>
+                    <li><a href="#target" class="mobile-nav-link">Аудиторія</a></li>
+                    <li><a href="#authors" class="mobile-nav-link">Автори</a></li>
+                    <li><a href="#contact" class="mobile-nav-link">Зв'язатися</a></li>
+                </ul>
+                <div class="mobile-menu-bg"></div>
             </div>
         </div>
-        <div class="hero-shape-1"></div>
-        <div class="hero-shape-2"></div>
-    </section>
 
-    <section id="about" class="about section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal-up">Про <span class="accent">проект</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="about-content">
-                <div class="card product-card reveal-up" data-delay="200">
-                    <div class="card-image">
-                        <img src="images/card1.jpg" alt="Метафоричні асоціативні карти">
-                        <div class="image-overlay"></div>
+        <!-- Головна секція (Hero) -->
+        <section id="hero" class="section hero-section" data-section="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h2 class="hero-title split-text">МАК "Коріння та крила"</h2>
+                        <p class="hero-subtitle split-text">Інструмент для роботи з травмами вимушеної міграції</p>
+                        <p class="hero-description">Метафоричні асоціативні карти створені психологом і художником, які самі пережили досвід еміграції через війну.</p>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card1.jpg" alt="Карта" class="card-image lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="card-back-image lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-buttons">
+                            <a href="#contact" class="btn btn-primary">Замовити <i class="fas fa-arrow-right"></i></a>
+                            <a href="#about" class="btn btn-outline">Дізнатися більше</a>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <h3>Метафоричні асоціативні карти</h3>
-                        <p>Вони допомагають:</p>
-                        <ul class="feature-list">
-                            <li><span class="icon"><i class="fas fa-check-circle"></i></span> Опрацьовувати болісні переживання, пов'язані з еміграцією та втратою</li>
-                            <li><span class="icon"><i class="fas fa-check-circle"></i></span> Знаходити ресурси для адаптації в новому середовищі</li>
-                            <li><span class="icon"><i class="fas fa-check-circle"></i></span> Інтегруватися в нову культуру та суспільство</li>
+                    <div class="hero-image">
+                        <div class="image-container">
+                            <img src="images/hero-background.jpg" alt="МАК Коріння та крила" class="lazy-load">
+                            <div class="floating-card card-1"></div>
+                            <div class="floating-card card-2"></div>
+                            <div class="floating-card card-3"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="scroll-indicator">
+                    <div class="scroll-icon">
+                        <div class="scroll-dot"></div>
+                    </div>
+                    <span>Прокрутіть вниз</span>
+                </div>
+            </div>
+            
+            <div class="hero-particles"></div>
+            <div class="hero-shape-1"></div>
+            <div class="hero-shape-2"></div>
+        </section>
+
+        <!-- Візуальна секція - Розкладання карт -->
+        <section class="section visual-section cards-spread" data-section="cards-spread-1">
+            <div class="cards-spread-container">
+                <div class="spread-card card-spread-1">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/card1.jpg" alt="Карта 1" class="lazy-load">
+                        </div>
+                        <div class="card-back">
+                            <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                <div class="spread-card card-spread-2">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/card2.jpg" alt="Карта 2" class="lazy-load">
+                        </div>
+                        <div class="card-back">
+                            <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                <div class="spread-card card-spread-3">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/card3.jpg" alt="Карта 3" class="lazy-load">
+                        </div>
+                        <div class="card-back">
+                            <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                <div class="spread-card card-spread-4">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/card4.jpg" alt="Карта 4" class="lazy-load">
+                        </div>
+                        <div class="card-back">
+                            <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                <div class="spread-card card-spread-5">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/card5.jpg" alt="Карта 5" class="lazy-load">
+                        </div>
+                        <div class="card-back">
+                            <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-heading">
+                <h2 class="visual-title split-text">Відкрийте світ нових метафор</h2>
+            </div>
+        </section>
+
+        <!-- Секція "Про проект" -->
+        <section id="about" class="section about-section" data-section="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title split-text">Про <span class="accent">проект</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="about-content">
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="images/card1.jpg" alt="Метафоричні асоціативні карти" class="lazy-load">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="split-text">Метафоричні асоціативні карти</h3>
+                            <p>Вони допомагають:</p>
+                            
+                            <!-- Анімована карта -->
+                            <div class="card-animation-container side-card">
+                                <div class="card card-draw">
+                                    <div class="card-front">
+                                        <img src="images/card2.jpg" alt="Карта" class="lazy-load">
+                                    </div>
+                                    <div class="card-back">
+                                        <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <ul class="feature-list">
+                                <li class="feature-item"><span class="icon"><i class="fas fa-check-circle"></i></span> Опрацьовувати болісні переживання, пов'язані з еміграцією та втратою</li>
+                                <li class="feature-item"><span class="icon"><i class="fas fa-check-circle"></i></span> Знаходити ресурси для адаптації в новому середовищі</li>
+                                <li class="feature-item"><span class="icon"><i class="fas fa-check-circle"></i></span> Інтегруватися в нову культуру та суспільство</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-shape-1"></div>
+        </section>
+
+        <!-- Візуальна секція - 3D Карусель карт -->
+        <section class="section visual-section cards-carousel" data-section="cards-carousel">
+            <div class="carousel-container">
+                <div class="carousel-3d">
+                    <div class="carousel-card" style="--card-index: 0;">
+                        <div class="card-inner">
+                            <img src="images/card6.jpg" alt="Карта 6" class="lazy-load">
+                        </div>
+                    </div>
+                    <div class="carousel-card" style="--card-index: 1;">
+                        <div class="card-inner">
+                            <img src="images/card7.jpg" alt="Карта 7" class="lazy-load">
+                        </div>
+                    </div>
+                    <div class="carousel-card" style="--card-index: 2;">
+                        <div class="card-inner">
+                            <img src="images/card8.jpg" alt="Карта 8" class="lazy-load">
+                        </div>
+                    </div>
+                    <div class="carousel-card" style="--card-index: 3;">
+                        <div class="card-inner">
+                            <img src="images/card9.jpg" alt="Карта 9" class="lazy-load">
+                        </div>
+                    </div>
+                    <div class="carousel-card" style="--card-index: 4;">
+                        <div class="card-inner">
+                            <img src="images/card10.jpg" alt="Карта 10" class="lazy-load">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секція "Особливості" -->
+        <section id="features" class="section features-section dark-section" data-section="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title split-text">Особливості <span class="accent">продукту</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="split-text">Глибокий символізм</h3>
+                        <p>Об'єднує теми рідного дому, ідентичності та інтеграції в новому середовищі</p>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container mini-card">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card3.jpg" alt="Карта" class="lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 class="split-text">Естетичне поєднання</h3>
+                        <p>Гармонія художньої виразності та психологічного змісту в кожній карті</p>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container mini-card">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card4.jpg" alt="Карта" class="lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="split-text">Професійні вправи</h3>
+                        <p>Інструкція містить техніки роботи з клієнтами для психологів та терапевтів</p>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container mini-card">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card5.jpg" alt="Карта" class="lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-shape-2"></div>
+        </section>
+
+        <!-- Візуальна секція - Карти, що випадають -->
+        <section class="section visual-section falling-cards" data-section="falling-cards">
+            <div class="falling-cards-container">
+                <div class="falling-card" style="--delay: 0.1s;">
+                    <img src="images/card11.jpg" alt="Карта 11" class="lazy-load">
+                </div>
+                <div class="falling-card" style="--delay: 0.3s;">
+                    <img src="images/card12.jpg" alt="Карта 12" class="lazy-load">
+                </div>
+                <div class="falling-card" style="--delay: 0.2s;">
+                    <img src="images/card13.jpg" alt="Карта 13" class="lazy-load">
+                </div>
+                <div class="falling-card" style="--delay: 0.5s;">
+                    <img src="images/card14.jpg" alt="Карта 14" class="lazy-load">
+                </div>
+                <div class="falling-card" style="--delay: 0.4s;">
+                    <img src="images/card15.jpg" alt="Карта 15" class="lazy-load">
+                </div>
+                <div class="falling-card" style="--delay: 0.6s;">
+                    <img src="images/card16.jpg" alt="Карта 16" class="lazy-load">
+                </div>
+                <div class="falling-card" style="--delay: 0.3s;">
+                    <img src="images/card17.jpg" alt="Карта 17" class="lazy-load">
+                </div>
+                <div class="falling-card" style="--delay: 0.2s;">
+                    <img src="images/card18.jpg" alt="Карта 18" class="lazy-load">
+                </div>
+            </div>
+        </section>
+
+        <!-- Секція "Комплектація" -->
+        <section id="contents" class="section contents-section" data-section="contents">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title split-text">Комплектація <span class="accent">набору</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="contents-grid">
+                    <div class="content-image">
+                        <img src="images/card1.jpg" alt="Набір карт" class="lazy-load">
+                        <div class="image-reveal-overlay"></div>
+                    </div>
+                    <div class="content-details">
+                        <div class="content-item">
+                            <div class="content-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="content-text">
+                                <h3 class="split-text">Карти з унікальними образами</h3>
+                                <p>Картини української художниці Марини Камінської з глибоким символічним значенням</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card6.jpg" alt="Карта" class="lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-item">
+                            <div class="content-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="content-text">
+                                <h3 class="split-text">Книга-інструкція з вправами</h3>
+                                <p>Розроблена практикуючим психологом Оксаною Биркою для ефективної роботи з клієнтами</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Візуальна секція - Карти у 3D просторі -->
+        <section class="section visual-section cards-grid-3d" data-section="cards-grid-3d">
+            <div class="cards-grid-container">
+                <div class="grid-card" style="--x: 0; --y: 0;">
+                    <img src="images/card19.jpg" alt="Карта 19" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 1; --y: 0;">
+                    <img src="images/card20.jpg" alt="Карта 20" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 2; --y: 0;">
+                    <img src="images/card21.jpg" alt="Карта 21" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 0; --y: 1;">
+                    <img src="images/card22.jpg" alt="Карта 22" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 1; --y: 1;">
+                    <img src="images/card23.jpg" alt="Карта 23" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 2; --y: 1;">
+                    <img src="images/card24.jpg" alt="Карта 24" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 0; --y: 2;">
+                    <img src="images/card25.jpg" alt="Карта 25" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 1; --y: 2;">
+                    <img src="images/card26.jpg" alt="Карта 26" class="lazy-load">
+                </div>
+                <div class="grid-card" style="--x: 2; --y: 2;">
+                    <img src="images/card27.jpg" alt="Карта 27" class="lazy-load">
+                </div>
+            </div>
+        </section>
+
+        <!-- Секція "Цільова аудиторія" -->
+        <section id="target" class="section target-section dark-section" data-section="target">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title split-text">Цільова <span class="accent">аудиторія</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="target-content">
+                    <div class="target-card">
+                        <div class="target-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="target-text">
+                            <p class="split-text">Психологи, психотерапевти, соціальні працівники та фахівці, що допомагають клієнтам долати кризові етапи та труднощі адаптації.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Анімована карта -->
+                    <div class="card-animation-container centered-card">
+                        <div class="card card-draw">
+                            <div class="card-front">
+                                <img src="images/card7.jpg" alt="Карта" class="lazy-load">
+                            </div>
+                            <div class="card-back">
+                                <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секція "Місія" -->
+        <section id="mission" class="section mission-section" data-section="mission">
+            <div class="parallax-bg"></div>
+            <div class="container">
+                <div class="mission-content">
+                    <h2 class="mission-title split-text">Місія МАК "Коріння та Крила"</h2>
+                    <p class="mission-text split-text">Зберегти зв'язок з корінням та виростити нові крила для подолання кризи та знаходження ресурсу.</p>
+                    
+                    <!-- Анімована карта -->
+                    <div class="card-animation-container large-card">
+                        <div class="card card-draw">
+                            <div class="card-front">
+                                <img src="images/card8.jpg" alt="Карта" class="lazy-load">
+                            </div>
+                            <div class="card-back">
+                                <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Візуальна секція - Стос карт -->
+        <section class="section visual-section cards-deck" data-section="cards-deck">
+            <div class="deck-container">
+                <div class="deck">
+                    <div class="deck-card" style="--index: 1;">
+                        <img src="images/card-back.jpg" alt="Колода карт" class="lazy-load">
+                    </div>
+                    <div class="deck-card" style="--index: 2;">
+                        <img src="images/card-back.jpg" alt="Колода карт" class="lazy-load">
+                    </div>
+                    <div class="deck-card" style="--index: 3;">
+                        <img src="images/card-back.jpg" alt="Колода карт" class="lazy-load">
+                    </div>
+                    <div class="deck-card" style="--index: 4;">
+                        <img src="images/card-back.jpg" alt="Колода карт" class="lazy-load">
+                    </div>
+                    <div class="deck-card" style="--index: 5;">
+                        <img src="images/card-back.jpg" alt="Колода карт" class="lazy-load">
+                    </div>
+                    <div class="deck-card deck-top" style="--index: 6;">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <img src="images/card9.jpg" alt="Верхня карта" class="lazy-load">
+                            </div>
+                            <div class="card-back">
+                                <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="draw-button">
+                    <span>Витягнути карту</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секція "Автори" -->
+        <section id="authors" class="section authors-section" data-section="authors">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title split-text">Автори <span class="accent">проекту</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="authors-grid">
+                    <div class="author-card">
+                        <div class="author-photo">
+                            <img src="images/oksana.jpg" alt="Оксана Бирка" class="lazy-load">
+                            <div class="author-photo-overlay"></div>
+                        </div>
+                        <h3 class="author-name split-text">Оксана Бирка</h3>
+                        <p class="author-title">Психолог, арт-терапевт</p>
+                        <p class="author-bio">Системний сімейний та дитячий психотерапевт, працює в інтегративному підході.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" data-cursor-text="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link" data-cursor-text="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" data-cursor-text="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container author-card-anim">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card10.jpg" alt="Карта" class="lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="author-card">
+                        <div class="author-photo">
+                            <img src="images/marina.jpg" alt="Марина Камінська" class="lazy-load">
+                            <div class="author-photo-overlay"></div>
+                        </div>
+                        <h3 class="author-name split-text">Марина Камінська</h3>
+                        <p class="author-title">Українська мисткиня</p>
+                        <p class="author-bio">Працює з акрилом та аквареллю, втілюючи процес самопізнання у своїй творчості.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" data-cursor-text="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link" data-cursor-text="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" data-cursor-text="Behance"><i class="fab fa-behance"></i></a>
+                        </div>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container author-card-anim">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card11.jpg" alt="Карта" class="lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секція "Контакт" -->
+        <section id="contact" class="section contact-section dark-section" data-section="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title split-text">Для <span class="accent">співпраці</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <p class="contact-text">Напишіть нам:</p>
+                        <a href="mailto:contact@korinnya-kryla.com" class="email-link" data-cursor-text="Написати">contact@korinnya-kryla.com</a>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="method-details">
+                                    <h3>Телефон</h3>
+                                    <p>+380 50 123 4567</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="method-details">
+                                    <h3>Адреса</h3>
+                                    <p>м. Київ, вул. Психологічна, 12</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Анімована карта -->
+                        <div class="card-animation-container contact-card">
+                            <div class="card card-draw">
+                                <div class="card-front">
+                                    <img src="images/card12.jpg" alt="Карта" class="lazy-load">
+                                </div>
+                                <div class="card-back">
+                                    <img src="images/card-back.jpg" alt="Зворотня сторона" class="lazy-load">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Ваше ім'я</label>
+                            <input type="text" id="name" placeholder="Введіть ваше ім'я" required>
+                            <div class="input-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Ваш email</label>
+                            <input type="email" id="email" placeholder="Введіть ваш email" required>
+                            <div class="input-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Ваше повідомлення</label>
+                            <textarea id="message" placeholder="Введіть ваше повідомлення" rows="5" required></textarea>
+                            <div class="input-line"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-cursor-text="Надіслати">Надіслати <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Футер -->
+        <footer class="footer section" data-section="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h2>Коріння та крила</h2>
+                        <p>Інструмент для роботи з травмами вимушеної міграції</p>
+                    </div>
+                    <div class="footer-navigation">
+                        <h3>Навігація</h3>
+                        <ul>
+                            <li><a href="#about" data-cursor-text="Перейти">Про проект</a></li>
+                            <li><a href="#features" data-cursor-text="Перейти">Особливості</a></li>
+                            <li><a href="#target" data-cursor-text="Перейти">Аудиторія</a></li>
+                            <li><a href="#authors" data-cursor-text="Перейти">Автори</a></li>
+                            <li><a href="#contact" data-cursor-text="Перейти">Зв'язатися</a></li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="section-shape-1"></div>
-    </section>
-
-    <section id="features" class="features section-padding dark-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal-up">Особливості <span class="accent">продукту</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card reveal-up" data-delay="100">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>Глибокий символізм</h3>
-                    <p>Об'єднує теми рідного дому, ідентичності та інтеграції в новому середовищі</p>
-                </div>
-                <div class="feature-card reveal-up" data-delay="300">
-                    <div class="feature-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>Естетичне поєднання</h3>
-                    <p>Гармонія художньої виразності та психологічного змісту в кожній карті</p>
-                </div>
-                <div class="feature-card reveal-up" data-delay="500">
-                    <div class="feature-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3>Професійні вправи</h3>
-                    <p>Інструкція містить техніки роботи з клієнтами для психологів та терапевтів</p>
-                </div>
-            </div>
-        </div>
-        <div class="section-shape-2"></div>
-    </section>
-
-    <section id="contents" class="contents section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal-up">Комплектація <span class="accent">набору</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="contents-grid">
-                <div class="content-image reveal-left">
-                    <img src="images/card1.jpg" alt="Набір карт">
-                </div>
-                <div class="content-details reveal-right">
-                    <div class="content-item">
-                        <div class="content-icon">
-                            <i class="fas fa-images"></i>
-                        </div>
-                        <div class="content-text">
-                            <h3>Карти з унікальними образами</h3>
-                            <p>Картини української художниці Марини Камінської з глибоким символічним значенням</p>
-                        </div>
-                    </div>
-                    <div class="content-item">
-                        <div class="content-icon">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <div class="content-text">
-                            <h3>Книга-інструкція з вправами</h3>
-                            <p>Розроблена практикуючим психологом Оксаною Биркою для ефективної роботи з клієнтами</p>
+                    <div class="footer-social">
+                        <h3>Соціальні мережі</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" data-cursor-text="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon" data-cursor-text="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon" data-cursor-text="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon" data-cursor-text="Twitter"><i class="fab fa-twitter"></i></a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="target" class="target section-padding dark-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal-up">Цільова <span class="accent">аудиторія</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="target-content reveal-up">
-                <div class="target-card">
-                    <div class="target-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="target-text">
-                        <p>Психологи, психотерапевти, соціальні працівники та фахівці, що допомагають клієнтам долати кризові етапи та труднощі адаптації.</p>
-                    </div>
+                <div class="footer-bottom">
+                    <p>&copy; <span id="current-year">2025</span> МАК "Коріння та крила". Всі права захищено.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="mission" class="mission section-padding">
-        <div class="container">
-            <div class="mission-content">
-                <h2 class="mission-title reveal-up">Місія МАК "Коріння та Крила"</h2>
-                <p class="mission-text reveal-up" data-delay="200">Зберегти зв'язок з корінням та виростити нові крила для подолання кризи та знаходження ресурсу.</p>
-            </div>
-        </div>
-        <div class="parallax-bg"></div>
-    </section>
-
-    <section id="authors" class="authors section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal-up">Автори <span class="accent">проекту</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="authors-grid">
-                <div class="author-card reveal-up" data-delay="100">
-                    <div class="author-photo">
-                        <img src="images/oksana.jpg" alt="Оксана Бирка">
-                    </div>
-                    <h3 class="author-name">Оксана Бирка</h3>
-                    <p class="author-title">Психолог, арт-терапевт</p>
-                    <p class="author-bio">Системний сімейний та дитячий психотерапевт, працює в інтегративному підході.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="author-card reveal-up" data-delay="300">
-                    <div class="author-photo">
-                        <img src="images/marina.jpg" alt="Марина Камінська">
-                    </div>
-                    <h3 class="author-name">Марина Камінська</h3>
-                    <p class="author-title">Українська мисткиня</p>
-                    <p class="author-bio">Працює з акрилом та аквареллю, втілюючи процес самопізнання у своїй творчості.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact section-padding dark-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title reveal-up">Для <span class="accent">співпраці</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info reveal-left">
-                    <p class="contact-text">Напишіть нам:</p>
-                    <a href="mailto:contact@korinnya-kryla.com" class="email-link">contact@korinnya-kryla.com</a>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="method-icon">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="method-details">
-                                <h3>Телефон</h3>
-                                <p>+380 50 123 4567</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="method-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="method-details">
-                                <h3>Адреса</h3>
-                                <p>м. Київ, вул. Психологічна, 12</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <form class="contact-form reveal-right">
-                    <div class="form-group">
-                        <label for="name">Ваше ім'я</label>
-                        <input type="text" id="name" placeholder="Введіть ваше ім'я" required>
-                        <div class="input-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Ваш email</label>
-                        <input type="email" id="email" placeholder="Введіть ваш email" required>
-                        <div class="input-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Ваше повідомлення</label>
-                        <textarea id="message" placeholder="Введіть ваше повідомлення" rows="5" required></textarea>
-                        <div class="input-line"></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Надіслати <i class="fas fa-paper-plane"></i></button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>Коріння та крила</h2>
-                    <p>Інструмент для роботи з травмами вимушеної міграції</p>
-                </div>
-                <div class="footer-navigation">
-                    <h3>Навігація</h3>
-                    <ul>
-                        <li><a href="#about">Про проект</a></li>
-                        <li><a href="#features">Особливості</a></li>
-                        <li><a href="#target">Аудиторія</a></li>
-                        <li><a href="#authors">Автори</a></li>
-                        <li><a href="#contact">Зв'язатися</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h3>Соціальні мережі</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; <span id="current-year">2025</span> МАК "Коріння та крила". Всі права захищено.</p>
-            </div>
-        </div>
-        <a href="#" class="back-to-top" title="На гору"><i class="fas fa-chevron-up"></i></a>
-    </footer>
+            <a href="#" class="back-to-top" title="На гору" data-cursor-text="Вгору"><i class="fas fa-chevron-up"></i></a>
+        </footer>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
